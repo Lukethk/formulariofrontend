@@ -1,0 +1,347 @@
+<div class="min-h-screen bg-gray-50 py-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Encabezado -->
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">🚒 Formulario de Necesidades - Brigada de Bomberos Forestales</h1>
+      <p class="text-gray-600">Complete este formulario para registrar las necesidades de equipamiento y suministros de su brigada</p>
+    </div>
+
+    <!-- Formulario -->
+    <div class="bg-white rounded-lg shadow-sm p-8">
+      <form [formGroup]="formulario" (ngSubmit)="onSubmit()" class="space-y-8">
+        
+        <!-- INFORMACIÓN GENERAL -->
+        <div class="border-b border-gray-200 pb-6">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">📋 Información General</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                Nombre de la Brigada <span class="text-red-500">*</span>
+              </label>
+              <input type="text" 
+                     formControlName="nombreBrigada"
+                     placeholder="Nombre de la brigada" 
+                     [class]="'w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ' + 
+                     (esCampoInvalido('nombreBrigada') ? 'border-red-500' : 'border-gray-300')">
+              <div *ngIf="esCampoInvalido('nombreBrigada')" class="mt-1 text-sm text-red-600">
+                {{ obtenerMensajeError('nombreBrigada') }}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                Cantidad de Bomberos Activos <span class="text-red-500">*</span>
+              </label>
+              <input type="number" 
+                     formControlName="cantidadBomberosActivos"
+                     min="1" 
+                     placeholder="0" 
+                     [class]="'w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ' + 
+                     (esCampoInvalido('cantidadBomberosActivos') ? 'border-red-500' : 'border-gray-300')">
+              <div *ngIf="esCampoInvalido('cantidadBomberosActivos')" class="mt-1 text-sm text-red-600">
+                {{ obtenerMensajeError('cantidadBomberosActivos') }}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                Contacto Celular Comandante <span class="text-red-500">*</span>
+              </label>
+              <input type="tel" 
+                     formControlName="contactoComandante"
+                     placeholder="+56 9 1234 5678" 
+                     [class]="'w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ' + 
+                     (esCampoInvalido('contactoComandante') ? 'border-red-500' : 'border-gray-300')">
+              <div *ngIf="esCampoInvalido('contactoComandante')" class="mt-1 text-sm text-red-600">
+                {{ obtenerMensajeError('contactoComandante') }}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                Encargado de Logística <span class="text-red-500">*</span>
+              </label>
+              <input type="text" 
+                     formControlName="encargadoLogistica"
+                     placeholder="Nombre del encargado" 
+                     [class]="'w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ' + 
+                     (esCampoInvalido('encargadoLogistica') ? 'border-red-500' : 'border-gray-300')">
+              <div *ngIf="esCampoInvalido('encargadoLogistica')" class="mt-1 text-sm text-red-600">
+                {{ obtenerMensajeError('encargadoLogistica') }}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                Contacto Celular Logística <span class="text-red-500">*</span>
+              </label>
+              <input type="tel" 
+                     formControlName="contactoLogistica"
+                     placeholder="+56 9 1234 5678" 
+                     [class]="'w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent ' + 
+                     (esCampoInvalido('contactoLogistica') ? 'border-red-500' : 'border-gray-300')">
+              <div *ngIf="esCampoInvalido('contactoLogistica')" class="mt-1 text-sm text-red-600">
+                {{ obtenerMensajeError('contactoLogistica') }}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                Número de Emergencia Público (si lo tiene)
+              </label>
+              <input type="tel" 
+                     formControlName="numeroEmergenciaPublico"
+                     placeholder="Número de emergencia" 
+                     class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+            </div>
+          </div>
+        </div>
+
+        <!-- EPP - EQUIPAMIENTO DE PROTECCIÓN PERSONAL -->
+        <div class="border-b border-gray-200 pb-6">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">👕 EPP - Equipamiento de Protección Personal</h2>
+          
+          <!-- Ropa -->
+          <div class="mb-8">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">👔 Ropa</h3>
+            
+            <!-- Camisa Forestal -->
+            <div class="mb-6" formGroupName="camisaForestal">
+              <h4 class="text-md font-medium text-gray-700 mb-3">Camisa Forestal</h4>
+              <div class="grid grid-cols-6 gap-4 mb-3">
+                <div *ngFor="let talla of tallasRopa" class="text-center">
+                  <label class="block text-xs font-medium text-gray-600 mb-1">Talla {{ talla }}</label>
+                  <input type="number" 
+                         [formControlName]="talla.toLowerCase()"
+                         min="0" 
+                         placeholder="0" 
+                         class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                </div>
+              </div>
+              <div class="col-span-full">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Observaciones</label>
+                <input type="text" 
+                       formControlName="observaciones"
+                       placeholder="Observaciones sobre camisas forestales" 
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+              </div>
+            </div>
+
+            <!-- Pantalón Forestal -->
+            <div class="mb-6" formGroupName="pantalonForestal">
+              <h4 class="text-md font-medium text-gray-700 mb-3">Pantalón Forestal</h4>
+              <div class="grid grid-cols-6 gap-4 mb-3">
+                <div *ngFor="let talla of tallasRopa" class="text-center">
+                  <label class="block text-xs font-medium text-gray-600 mb-1">Talla {{ talla }}</label>
+                  <input type="number" 
+                         [formControlName]="talla.toLowerCase()"
+                         min="0" 
+                         placeholder="0" 
+                         class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                </div>
+              </div>
+              <div class="col-span-full">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Observaciones</label>
+                <input type="text" 
+                       formControlName="observaciones"
+                       placeholder="Observaciones sobre pantalones forestales" 
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+              </div>
+            </div>
+
+            <!-- Overol FR -->
+            <div class="mb-6" formGroupName="overolFR">
+              <h4 class="text-md font-medium text-gray-700 mb-3">Overol FR (Flame Retardant)</h4>
+              <div class="grid grid-cols-6 gap-4 mb-3">
+                <div *ngFor="let talla of tallasRopa" class="text-center">
+                  <label class="block text-xs font-medium text-gray-600 mb-1">Talla {{ talla }}</label>
+                  <input type="number" 
+                         [formControlName]="talla.toLowerCase()"
+                         min="0" 
+                         placeholder="0" 
+                         class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                </div>
+              </div>
+              <div class="col-span-full">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Observaciones</label>
+                <input type="text" 
+                       formControlName="observaciones"
+                       placeholder="Observaciones sobre overoles FR" 
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+              </div>
+            </div>
+          </div>
+
+          <!-- Botas -->
+            <div class="mb-8" formGroupName="botasForestales">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">👢 Botas para Bomberos Forestales</h3>
+            <div class="grid grid-cols-8 gap-4 mb-3">
+              <div *ngFor="let talla of tallasBotas" class="text-center">
+                <label class="block text-xs font-medium text-gray-600 mb-1">{{ talla }}</label>
+                <input type="number" 
+                       [formControlName]="talla"
+                       min="0" 
+                       placeholder="0" 
+                       class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+              </div>
+              <div class="text-center">
+                <label class="block text-xs font-medium text-gray-600 mb-1">Otra</label>
+                <input type="text" 
+                       formControlName="otraTalla"
+                       placeholder="Especificar" 
+                       class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+              </div>
+            </div>
+          </div>
+
+          <!-- EPP General -->
+          <div class="mb-8">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">🛡️ EPP General</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div formGroupName="esclavina">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Esclavina</label>
+                <div class="grid grid-cols-2 gap-4">
+                  <input type="number" 
+                         formControlName="cantidad"
+                         min="0" 
+                         placeholder="Cantidad" 
+                         class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                  <input type="text" 
+                         formControlName="observaciones"
+                         placeholder="Observaciones" 
+                         class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                </div>
+              </div>
+
+              <div formGroupName="linterna">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Linterna</label>
+                <div class="grid grid-cols-2 gap-4">
+                  <input type="number" 
+                         formControlName="cantidad"
+                         min="0" 
+                         placeholder="Cantidad" 
+                         class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                  <input type="text" 
+                         formControlName="observaciones"
+                         placeholder="Observaciones" 
+                         class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                </div>
+              </div>
+
+              <div formGroupName="antiparra">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Antiparra</label>
+                <div class="grid grid-cols-2 gap-4">
+                  <input type="number" 
+                         formControlName="cantidad"
+                         min="0" 
+                         placeholder="Cantidad" 
+                         class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                  <input type="text" 
+                         formControlName="observaciones"
+                         placeholder="Observaciones" 
+                         class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                </div>
+              </div>
+
+              <div formGroupName="cascoForestal">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Casco Forestal Ala Ancha</label>
+                <div class="grid grid-cols-2 gap-4">
+                  <input type="number" 
+                         formControlName="cantidad"
+                         min="0" 
+                         placeholder="Cantidad" 
+                         class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                  <input type="text" 
+                         formControlName="observaciones"
+                         placeholder="Observaciones" 
+                         class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                </div>
+              </div>
+
+              <div formGroupName="mascaraPolvo">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Máscara para Polvo y Partículas</label>
+                <div class="grid grid-cols-2 gap-4">
+                  <input type="number" 
+                         formControlName="cantidad"
+                         min="0" 
+                         placeholder="Cantidad" 
+                         class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                  <input type="text" 
+                         formControlName="observaciones"
+                         placeholder="Observaciones" 
+                         class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                </div>
+              </div>
+
+              <div formGroupName="mascaraMediaCara">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Máscara Media Cara</label>
+                <div class="grid grid-cols-2 gap-4">
+                  <input type="number" 
+                         formControlName="cantidad"
+                         min="0" 
+                         placeholder="Cantidad" 
+                         class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                  <input type="text" 
+                         formControlName="observaciones"
+                         placeholder="Observaciones" 
+                         class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Guantes -->
+          <div class="mb-8">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">🧤 Guantes de Cuero</h3>
+            <div class="grid grid-cols-7 gap-4 mb-3" formGroupName="guantesCuero">
+              <div *ngFor="let talla of tallasGuantes" class="text-center">
+                <label class="block text-xs font-medium text-gray-600 mb-1">Talla {{ talla }}</label>
+                <input type="number" 
+                       [formControlName]="talla.toLowerCase()"
+                       min="0" 
+                       placeholder="0" 
+                       class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+              </div>
+              <div class="text-center">
+                <label class="block text-xs font-medium text-gray-600 mb-1">Otra</label>
+                <input type="text" 
+                       formControlName="otraTalla"
+                       placeholder="Especificar" 
+                       class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t">
+          <button type="submit" 
+                  [disabled]="enviando"
+                  class="flex-1 bg-red-600 text-white px-6 py-3 rounded-md hover:bg-red-700 transition-colors duration-200 font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed">
+            <span *ngIf="!enviando">🚒 Enviar Formulario de Necesidades</span>
+            <span *ngIf="enviando">⏳ Enviando...</span>
+          </button>
+          <button type="button" 
+                  (click)="limpiarFormulario()"
+                  class="px-6 py-3 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors duration-200 font-medium">
+            🔄 Limpiar Formulario
+          </button>
+        </div>
+
+        <!-- Mensaje de éxito -->
+        <div *ngIf="enviado" class="bg-green-50 border border-green-200 rounded-md p-4 mt-4">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <span class="text-green-400">✅</span>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm text-green-800">
+                <strong>¡Éxito!</strong> El formulario de necesidades ha sido enviado correctamente.
+              </p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
