@@ -5,6 +5,7 @@ export const environment = {
 };
 
 export const API_ENDPOINTS = {
+  AUTH: '/auth',
   BRIGADAS: '/brigadas',
   CATEGORIAS: '/categorias',
   EQUIPOS: '/equipos',

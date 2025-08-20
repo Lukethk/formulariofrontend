@@ -1,0 +1,680 @@
+/* Dashboard Component Styles - Diseño Moderno y Minimalista */
+
+/* Variables CSS */
+:root {
+  --color-primary: #ef4444;
+  --color-primary-dark: #dc2626;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-900: #111827;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --border-radius: 0.5rem;
+  --border-radius-lg: 0.75rem;
+  --border-width: 2px;
+  --border-width-thick: 3px;
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Animaciones suaves */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Estilos del container principal */
+.dashboard-modern {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  animation: fadeIn 0.6s ease-out;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+/* Separadores de sección */
+.dashboard-modern .mb-12 {
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.dashboard-modern .mb-12::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gray-300), transparent);
+}
+
+/* Títulos de sección con bordes */
+.dashboard-modern h2 {
+  position: relative;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-modern h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 3rem;
+  height: var(--border-width-thick);
+  background: var(--color-primary);
+  border-radius: var(--border-radius);
+}
+
+/* Header moderno mejorado */
+.dashboard-modern header {
+  background: linear-gradient(135deg, #111827 0%, #1f2937 50%, #111827 100%);
+  border-bottom: var(--border-width-thick) solid var(--color-primary);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-modern header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.6s ease;
+}
+
+.dashboard-modern header:hover::before {
+  left: 100%;
+}
+
+.dashboard-modern header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary), #fbbf24, var(--color-primary));
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Botones principales de acción */
+.dashboard-modern button {
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.dashboard-modern button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.dashboard-modern button:hover::before {
+  left: 100%;
+}
+
+/* Tarjetas de acceso rápido con efecto glow */
+.dashboard-modern .grid button {
+  background: white;
+  border: var(--border-width) solid var(--color-gray-300);
+  border-radius: var(--border-radius-lg);
+  padding: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transform: scale(1);
+}
+
+/* Efecto glow de fondo personalizado */
+.dashboard-modern .grid button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(59, 130, 246, 0.1) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+/* Efectos específicos por tipo de tarjeta */
+.dashboard-modern .grid button.from-red-50::before {
+  background: linear-gradient(135deg, transparent 0%, rgba(239, 68, 68, 0.15) 50%, transparent 100%);
+}
+
+.dashboard-modern .grid button.from-blue-50::before {
+  background: linear-gradient(135deg, transparent 0%, rgba(59, 130, 246, 0.15) 50%, transparent 100%);
+}
+
+.dashboard-modern .grid button.from-purple-50::before {
+  background: linear-gradient(135deg, transparent 0%, rgba(147, 51, 234, 0.15) 50%, transparent 100%);
+}
+
+/* Bordes glow específicos en hover */
+.dashboard-modern .grid button.from-red-50:hover {
+  box-shadow: 0 20px 40px rgba(239, 68, 68, 0.2), 0 0 0 1px rgba(239, 68, 68, 0.3);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.dashboard-modern .grid button.from-blue-50:hover {
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2), 0 0 0 1px rgba(59, 130, 246, 0.3);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.dashboard-modern .grid button.from-purple-50:hover {
+  box-shadow: 0 20px 40px rgba(147, 51, 234, 0.2), 0 0 0 1px rgba(147, 51, 234, 0.3);
+  border-color: rgba(147, 51, 234, 0.4);
+}
+
+.dashboard-modern .grid button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.3);
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.dashboard-modern .grid button:hover::before {
+  opacity: 1;
+}
+
+.dashboard-modern .grid button:active {
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Efecto de focus mejorado */
+.dashboard-modern button:focus-visible {
+  ring: 2px solid var(--color-primary);
+  ring-offset: 2px;
+}
+
+/* Iconos en tarjetas con efecto glow */
+.dashboard-modern .grid button .w-12,
+.dashboard-modern .grid button .w-14 {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-modern .grid button:hover .w-12,
+.dashboard-modern .grid button:hover .w-14 {
+  transform: scale(1.15) rotate(5deg);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* Efecto pulsante para iconos */
+.dashboard-modern .grid button .w-12::after,
+.dashboard-modern .grid button .w-14::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: inherit;
+  border-radius: inherit;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.dashboard-modern .grid button:hover .w-12::after,
+.dashboard-modern .grid button:hover .w-14::after {
+  opacity: 0.3;
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.1;
+  }
+}
+
+/* Estadísticas con efecto shimmer */
+.dashboard-modern .grid > div {
+  animation: fadeIn 0.6s ease-out;
+  animation-fill-mode: both;
+  border: var(--border-width) solid var(--color-gray-200);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  transform: scale(1);
+}
+
+/* Efecto shimmer para estadísticas */
+.dashboard-modern .grid > div::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transition: left 0.6s ease;
+  z-index: 1;
+}
+
+.dashboard-modern .grid > div:hover {
+  border-color: var(--color-gray-400);
+  border-width: var(--border-width-thick);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12), 0 5px 15px rgba(0, 0, 0, 0.08);
+  transform: scale(1.03);
+}
+
+.dashboard-modern .grid > div:hover::before {
+  left: 100%;
+}
+
+.dashboard-modern .grid > div:nth-child(1) { animation-delay: 0.1s; }
+.dashboard-modern .grid > div:nth-child(2) { animation-delay: 0.2s; }
+.dashboard-modern .grid > div:nth-child(3) { animation-delay: 0.3s; }
+.dashboard-modern .grid > div:nth-child(4) { animation-delay: 0.4s; }
+
+/* Actividad reciente */
+.dashboard-modern .divide-y > div {
+  transition: var(--transition);
+  position: relative;
+  border-left: var(--border-width) solid transparent;
+  margin-left: 0.5rem;
+}
+
+.dashboard-modern .divide-y > div:hover {
+  background-color: var(--color-gray-50);
+  border-left-color: var(--color-primary);
+  border-left-width: var(--border-width-thick);
+  margin-left: 0;
+  padding-left: 1rem;
+}
+
+.dashboard-modern .divide-y > div::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: var(--border-width-thick);
+  background: var(--color-primary);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.dashboard-modern .divide-y > div:not(.opacity-60):hover::before {
+  transform: scaleY(1);
+}
+
+/* Contenedor de actividad reciente */
+.dashboard-modern .divide-y {
+  border: var(--border-width) solid var(--color-gray-200);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Información personal */
+.dashboard-modern .space-y-4 > div {
+  transition: var(--transition);
+  position: relative;
+  border: var(--border-width) solid transparent;
+  border-radius: var(--border-radius);
+  padding: 0.75rem;
+}
+
+.dashboard-modern .space-y-4 > div:hover {
+  background-color: var(--color-gray-50);
+  border-color: var(--color-gray-300);
+  border-width: var(--border-width-thick);
+  padding-left: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Contenedor de información personal */
+.dashboard-modern .space-y-4 {
+  border: var(--border-width) solid var(--color-gray-200);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 1rem;
+}
+
+/* Micro-interacciones para iconos */
+.dashboard-modern svg {
+  transition: var(--transition);
+}
+
+.dashboard-modern button:hover svg {
+  transform: scale(1.1);
+}
+
+/* Botón de emergencia destacado */
+.dashboard-modern button.bg-red-500 {
+  position: relative;
+  animation: none;
+  border: var(--border-width-thick) solid var(--color-primary-dark);
+  box-shadow: var(--shadow-lg);
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  overflow: hidden;
+}
+
+.dashboard-modern button.bg-red-500:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(239, 68, 68, 0.5);
+  border-color: #fbbf24;
+}
+
+.dashboard-modern button.bg-red-500:active {
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: var(--shadow-md);
+}
+
+/* Efecto de pulso para el botón de emergencia */
+.dashboard-modern button.bg-red-500::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--color-primary), var(--color-primary-dark), var(--color-primary));
+  border-radius: inherit;
+  z-index: -1;
+  animation: pulse 2s infinite;
+}
+
+/* Estilos para el logo y título del header */
+.dashboard-modern header .w-12 {
+  transition: var(--transition);
+}
+
+.dashboard-modern header:hover .w-12 {
+  transform: scale(1.05) rotate(5deg);
+}
+
+.dashboard-modern header .border-l-2 {
+  border-color: var(--color-primary);
+}
+
+/* Estilos para las notificaciones del header */
+.dashboard-modern header .group:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.dashboard-modern header .animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0,0,0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -8px, 0);
+  }
+  70% {
+    transform: translate3d(0, -4px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+/* Estilos para el área de usuario del header */
+.dashboard-modern header .bg-white.bg-opacity-10 {
+  backdrop-filter: blur(20px);
+  transition: var(--transition);
+}
+
+.dashboard-modern header .bg-white.bg-opacity-10:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-modern header .w-10 {
+  transition: var(--transition);
+}
+
+.dashboard-modern header .bg-white.bg-opacity-10:hover .w-10 {
+  transform: scale(1.1);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Estados de hover más sutiles */
+.dashboard-modern .text-gray-400:hover {
+  color: var(--color-gray-600);
+}
+
+.dashboard-modern .text-gray-500:hover {
+  color: var(--color-gray-700);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .dashboard-modern .grid.md\\:grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .dashboard-modern .grid.md\\:grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-modern .grid.grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-modern .grid.md\\:grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-modern .grid.md\\:grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-modern header .flex {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  
+  .dashboard-modern .hidden.sm\\:block {
+    display: none !important;
+  }
+  
+  .dashboard-modern .px-6 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard-modern .py-8 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  
+  .dashboard-modern .mb-12 {
+    margin-bottom: 2rem;
+  }
+  
+  .dashboard-modern .text-2xl {
+    font-size: 1.5rem;
+  }
+  
+  .dashboard-modern .space-y-4 > div:hover {
+    padding-left: 0.5rem;
+  }
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-gray-50: #18181b;
+    --color-gray-100: #27272a;
+    --color-gray-200: #3f3f46;
+    --color-gray-300: #52525b;
+    --color-gray-400: #71717a;
+    --color-gray-500: #a1a1aa;
+    --color-gray-600: #d4d4d8;
+    --color-gray-700: #e4e4e7;
+    --color-gray-900: #fafafa;
+  }
+  
+  .dashboard-modern {
+    background-color: #09090b;
+    color: #fafafa;
+  }
+  
+  .dashboard-modern .bg-white {
+    background-color: #18181b;
+    border-color: #27272a;
+  }
+  
+  .dashboard-modern .text-gray-900 {
+    color: #fafafa;
+  }
+  
+  .dashboard-modern .text-gray-600 {
+    color: #a1a1aa;
+  }
+  
+  .dashboard-modern .text-gray-500 {
+    color: #71717a;
+  }
+}
+
+/* Utilidades adicionales */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+  position: relative;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border: 2px solid var(--color-gray-200);
+  border-top: 2px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Accesibilidad mejorada */
+.dashboard-modern button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.dashboard-modern *:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Scroll suave */
+.dashboard-modern {
+  scroll-behavior: smooth;
+}
+
+/* Optimizaciones de rendimiento */
+.dashboard-modern * {
+  will-change: auto;
+}
+
+/* Optimizaciones específicas para tarjetas de acceso rápido */
+.dashboard-modern .grid button {
+  will-change: transform, box-shadow, filter;
+  /* Usar compositing layer para evitar repaints */
+  backface-visibility: hidden;
+  transform: translateZ(0) scale(1);
+}
+
+/* Optimizaciones para estadísticas */
+.dashboard-modern .grid > div {
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
+  transform: translateZ(0) scale(1);
+}
+
+.dashboard-modern .divide-y > div {
+  will-change: background-color;
+}

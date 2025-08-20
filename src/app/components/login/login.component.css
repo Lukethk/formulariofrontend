@@ -1,0 +1,56 @@
+/* Estilos adicionales para el componente de login */
+.form-control:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* Animación de entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.min-h-screen > div {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Estilos para el botón de mostrar/ocultar contraseña */
+.password-toggle {
+  transition: all 0.2s ease-in-out;
+}
+
+.password-toggle:hover {
+  color: #dc2626;
+}
+
+/* Estilos para campos con error */
+.border-red-500:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* Estilos para el botón de submit */
+button[type="submit"]:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+button[type="submit"]:not(:disabled):active {
+  transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .max-w-md {
+    margin: 1rem;
+  }
+  
+  .text-3xl {
+    font-size: 1.875rem;
+  }
+}
