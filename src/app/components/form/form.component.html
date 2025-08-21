@@ -12,7 +12,7 @@
         
         <!-- INFORMACIÓN GENERAL -->
         <div class="border-b border-gray-200 pb-6">
-          <h2 class="text-2xl font-bold text-gray-900 mb-6">📋 Información General</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Información General</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -99,11 +99,11 @@
 
         <!-- EPP - EQUIPAMIENTO DE PROTECCIÓN PERSONAL -->
         <div class="border-b border-gray-200 pb-6">
-          <h2 class="text-2xl font-bold text-gray-900 mb-6">👕 EPP - Equipamiento de Protección Personal</h2>
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">EPP - Equipamiento de Protección Personal</h2>
           
           <!-- Ropa -->
           <div class="mb-8">
-            <h3 class="text-lg font-semibold text-gray-800 mb-4">👔 Ropa</h3>
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Ropa</h3>
             
             <!-- Camisa Forestal -->
             <div class="mb-6" formGroupName="camisaForestal">
@@ -174,7 +174,7 @@
 
           <!-- Botas -->
             <div class="mb-8" formGroupName="botasForestales">
-            <h3 class="text-lg font-semibold text-gray-800 mb-4">👢 Botas para Bomberos Forestales</h3>
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Botas para Bomberos Forestales</h3>
             <div class="grid grid-cols-8 gap-4 mb-3">
               <div *ngFor="let talla of tallasBotas" class="text-center">
                 <label class="block text-xs font-medium text-gray-600 mb-1">{{ talla }}</label>
@@ -196,7 +196,7 @@
 
           <!-- EPP General -->
           <div class="mb-8">
-            <h3 class="text-lg font-semibold text-gray-800 mb-4">🛡️ EPP General</h3>
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">EPP General</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div formGroupName="esclavina">
                 <label class="block text-sm font-medium text-gray-700 mb-2">Esclavina</label>
@@ -292,7 +292,7 @@
 
           <!-- Guantes -->
           <div class="mb-8">
-            <h3 class="text-lg font-semibold text-gray-800 mb-4">🧤 Guantes de Cuero</h3>
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Guantes de Cuero</h3>
             <div class="grid grid-cols-7 gap-4 mb-3" formGroupName="guantesCuero">
               <div *ngFor="let talla of tallasGuantes" class="text-center">
                 <label class="block text-xs font-medium text-gray-600 mb-1">Talla {{ talla }}</label>
@@ -318,13 +318,13 @@
           <button type="submit" 
                   [disabled]="enviando"
                   class="flex-1 bg-red-600 text-white px-6 py-3 rounded-md hover:bg-red-700 transition-colors duration-200 font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed">
-            <span *ngIf="!enviando">🚒 Enviar Formulario de Necesidades</span>
+            <span *ngIf="!enviando">Enviar Formulario de Necesidades</span>
             <span *ngIf="enviando">⏳ Enviando...</span>
           </button>
           <button type="button" 
                   (click)="limpiarFormulario()"
                   class="px-6 py-3 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors duration-200 font-medium">
-            🔄 Limpiar Formulario
+            Limpiar Formulario
           </button>
         </div>
 
