@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://formulario-backend-u7ku.onrender.com',
+  apiUrl: '/api',
 };
 
 export const API_ENDPOINTS = {
