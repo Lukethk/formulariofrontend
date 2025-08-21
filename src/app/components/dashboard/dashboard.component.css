@@ -678,3 +678,81 @@
 .dashboard-modern .divide-y > div {
   will-change: background-color;
 }
+
+/* Animaciones para notificaciones de "Próximamente" */
+@keyframes slideInFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-10%) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideOutToTop {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%) scale(0.8);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Estilos para notificaciones de "Próximamente" */
+.dashboard-modern .divide-y > div:first-child {
+  animation: slideInFromTop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.dashboard-modern .divide-y > div:first-child.removing {
+  animation: slideOutToTop 0.4s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+/* Efecto especial para notificaciones de "Próximamente" */
+.dashboard-modern .divide-y > div:first-child .text-lg {
+  animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s both;
+}
+
+/* Badge de "Próximamente" con animación */
+.dashboard-modern .bg-blue-100.text-blue-800 {
+  animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Efecto de pulso para el badge */
+.dashboard-modern .bg-blue-100.text-blue-800::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: inherit;
+  animation: pulse 2s infinite;
+  z-index: -1;
+}

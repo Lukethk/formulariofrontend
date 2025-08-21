@@ -338,7 +338,8 @@
         <div *ngFor="let notificacion of notificaciones; let i = index" 
              class="p-6 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-300 group cursor-pointer"
              [class.opacity-60]="notificacion.leida"
-             [style.animation-delay.ms]="i * 100">
+             [style.animation-delay.ms]="i * 100"
+             [attr.data-notificacion-id]="notificacion.id">
           <div class="flex items-start space-x-4">
             <div class="flex-shrink-0 mt-1">
               <div [class]="'w-12 h-12 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 ' + 

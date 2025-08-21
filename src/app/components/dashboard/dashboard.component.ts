@@ -385,6 +385,33 @@ export class DashboardComponent implements OnInit {
   }
 
   mostrarProximamente(funcionalidad: string): void {
-    alert(`🚀 Próximamente: ${funcionalidad}\n\nEsta funcionalidad estará disponible en una próxima actualización del sistema.`);
+    // Crear una notificación temporal con animación
+    const notificacion = {
+      id: Date.now().toString(),
+      titulo: '🚀 Próximamente',
+      mensaje: `${funcionalidad} estará disponible en una próxima actualización`,
+      tipo: 'info' as const,
+      fecha: new Date(),
+      leida: false
+    };
+    
+    // Agregar al inicio del array de notificaciones
+    this.notificaciones.unshift(notificacion);
+    
+    // Auto-remover después de 4 segundos con animación
+    setTimeout(() => {
+      // Marcar para animación de salida
+      const elemento = document.querySelector(`[data-notificacion-id="${notificacion.id}"]`);
+      if (elemento) {
+        elemento.classList.add('removing');
+        // Esperar a que termine la animación antes de remover
+        setTimeout(() => {
+          this.notificaciones = this.notificaciones.filter(n => n.id !== notificacion.id);
+        }, 400); // Duración de la animación slideOutToTop
+      } else {
+        // Fallback si no se encuentra el elemento
+        this.notificaciones = this.notificaciones.filter(n => n.id !== notificacion.id);
+      }
+    }, 4000);
   }
 }
