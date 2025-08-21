@@ -1,8 +1,8 @@
 export const environment = {
   production: false,
   
-  // URL base para desarrollo - usar proxy local para evitar CORS
-  apiUrl: '/api',
+  // URL base para desarrollo - incluyendo /api
+  apiUrl: 'https://formulario-backend-u7ku.onrender.com/api',
 };
 
 export const API_ENDPOINTS = {
