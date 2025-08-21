@@ -50,6 +50,9 @@ export class DashboardComponent implements OnInit {
   };
   
   notificaciones: Notificacion[] = [];
+  mostrarModalProximamente = false;
+  mensajeProximamente = '';
+  progresoProximamente = 0;
   
   // Menú personalizado según el rol del usuario
   get menuItems(): MenuItem[] {
@@ -385,33 +388,31 @@ export class DashboardComponent implements OnInit {
   }
 
   mostrarProximamente(funcionalidad: string): void {
-    // Crear una notificación temporal con animación
-    const notificacion = {
-      id: Date.now().toString(),
-      titulo: '🚀 Próximamente',
-      mensaje: `${funcionalidad} estará disponible en una próxima actualización`,
-      tipo: 'info' as const,
-      fecha: new Date(),
-      leida: false
-    };
+    this.mensajeProximamente = `${funcionalidad} estará disponible en una próxima actualización`;
+    this.mostrarModalProximamente = true;
+    this.progresoProximamente = 0;
     
-    // Agregar al inicio del array de notificaciones
-    this.notificaciones.unshift(notificacion);
+    // Iniciar barra de progreso
+    const duracion = 3000; // 3 segundos
+    const intervalo = 50; // Actualizar cada 50ms
+    const incremento = (intervalo / duracion) * 100;
     
-    // Auto-remover después de 4 segundos con animación
-    setTimeout(() => {
-      // Marcar para animación de salida
-      const elemento = document.querySelector(`[data-notificacion-id="${notificacion.id}"]`);
-      if (elemento) {
-        elemento.classList.add('removing');
-        // Esperar a que termine la animación antes de remover
+    const timer = setInterval(() => {
+      this.progresoProximamente += incremento;
+      if (this.progresoProximamente >= 100) {
+        clearInterval(timer);
+        this.progresoProximamente = 100;
+        // Cerrar automáticamente después de completar
         setTimeout(() => {
-          this.notificaciones = this.notificaciones.filter(n => n.id !== notificacion.id);
-        }, 400); // Duración de la animación slideOutToTop
-      } else {
-        // Fallback si no se encuentra el elemento
-        this.notificaciones = this.notificaciones.filter(n => n.id !== notificacion.id);
+          this.cerrarModalProximamente();
+        }, 500);
       }
-    }, 4000);
+    }, intervalo);
+  }
+
+  cerrarModalProximamente(): void {
+    this.mostrarModalProximamente = false;
+    this.progresoProximamente = 0;
+    this.mensajeProximamente = '';
   }
 }

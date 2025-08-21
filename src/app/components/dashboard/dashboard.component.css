@@ -706,6 +706,17 @@
   }
 }
 
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
 @keyframes bounceIn {
   0% {
     opacity: 0;
@@ -883,4 +894,9 @@
     opacity: 1;
     transform: translateY(0) scale(1.02) rotate(0deg);
   }
+}
+
+/* Animación para el modal de "Próximamente" */
+.animate-slideInRight {
+  animation: slideInRight 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
