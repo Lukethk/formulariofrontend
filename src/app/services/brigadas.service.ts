@@ -1,62 +1,80 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment, API_ENDPOINTS } from '../config/environment';
+import { Observable, of } from 'rxjs';
 
 export interface Brigada {
-  id?: string;
+  id: string;
   nombre: string;
-  cantidad_bomberos_activos?: number;
-  contacto_comandante?: string;
-  encargado_logistica?: string;
-  contacto_logistica?: string;
-  numero_emergencia_publico?: string;
-  region?: string;
-  activa?: boolean;
-  fecha_creacion?: Date;
-}
-
-export interface ApiResponse<T> {
-  success: boolean;
-  message: string;
-  data: T;
+  ubicacion: string;
+  activo: boolean;
+  fecha_creacion: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class BrigadasService {
-  private apiUrl = `${environment.apiUrl}${API_ENDPOINTS.BRIGADAS}`;
+  
+  // Datos mock para emergencia
+  private mockBrigadas: Brigada[] = [
+    {
+      id: '1',
+      nombre: 'Brigada Central',
+      ubicacion: 'Centro de la ciudad',
+      activo: true,
+      fecha_creacion: '2024-01-01'
+    },
+    {
+      id: '2',
+      nombre: 'Brigada Norte',
+      ubicacion: 'Zona norte',
+      activo: true,
+      fecha_creacion: '2024-01-15'
+    },
+    {
+      id: '3',
+      nombre: 'Brigada Sur',
+      ubicacion: 'Zona sur',
+      activo: true,
+      fecha_creacion: '2024-02-01'
+    }
+  ];
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
-  // Obtener todas las brigadas
-  getBrigadas(): Observable<ApiResponse<Brigada[]>> {
-    return this.http.get<ApiResponse<Brigada[]>>(this.apiUrl);
+  getBrigadas(): Observable<Brigada[]> {
+    return of(this.mockBrigadas);
   }
 
-  // Obtener brigada por ID
-  getBrigadaById(id: string): Observable<ApiResponse<Brigada>> {
-    return this.http.get<ApiResponse<Brigada>>(`${this.apiUrl}/${id}`);
+  getBrigadaById(id: string): Observable<Brigada | null> {
+    const brigada = this.mockBrigadas.find(b => b.id === id);
+    return of(brigada || null);
   }
 
-  // Crear nueva brigada
-  createBrigada(brigada: Brigada): Observable<ApiResponse<Brigada>> {
-    return this.http.post<ApiResponse<Brigada>>(this.apiUrl, brigada);
+  createBrigada(brigada: Omit<Brigada, 'id' | 'fecha_creacion'>): Observable<Brigada> {
+    const newBrigada: Brigada = {
+      ...brigada,
+      id: (this.mockBrigadas.length + 1).toString(),
+      fecha_creacion: new Date().toISOString().split('T')[0]
+    };
+    this.mockBrigadas.push(newBrigada);
+    return of(newBrigada);
   }
 
-  // Actualizar brigada
-  updateBrigada(id: string, brigada: Brigada): Observable<ApiResponse<Brigada>> {
-    return this.http.put<ApiResponse<Brigada>>(`${this.apiUrl}/${id}`, brigada);
+  updateBrigada(id: string, brigada: Partial<Brigada>): Observable<Brigada | null> {
+    const index = this.mockBrigadas.findIndex(b => b.id === id);
+    if (index !== -1) {
+      this.mockBrigadas[index] = { ...this.mockBrigadas[index], ...brigada };
+      return of(this.mockBrigadas[index]);
+    }
+    return of(null);
   }
 
-  // Eliminar brigada
-  deleteBrigada(id: string): Observable<ApiResponse<void>> {
-    return this.http.delete<ApiResponse<void>>(`${this.apiUrl}/${id}`);
-  }
-
-  // Buscar brigadas por nombre
-  searchBrigadas(nombre: string): Observable<ApiResponse<Brigada[]>> {
-    return this.http.get<ApiResponse<Brigada[]>>(`${this.apiUrl}/search?nombre=${nombre}`);
+  deleteBrigada(id: string): Observable<boolean> {
+    const index = this.mockBrigadas.findIndex(b => b.id === id);
+    if (index !== -1) {
+      this.mockBrigadas.splice(index, 1);
+      return of(true);
+    }
+    return of(false);
   }
 }
