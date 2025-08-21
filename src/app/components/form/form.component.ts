@@ -167,6 +167,7 @@ export interface FormularioNecesidadesBomberos {
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
+  styleUrls: ['./form.component.css'],
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule]
 })
@@ -174,6 +175,7 @@ export class FormComponent implements OnInit {
   formulario: FormGroup;
   enviando = false;
   enviado = false;
+  mostrarExito = false;
 
   tallasRopa = ['XS', 'S', 'M', 'L', 'XL'];
   tallasGuantes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
@@ -365,11 +367,8 @@ export class FormComponent implements OnInit {
       const payload = this.formulario.value;
       this.formulariosSrv.createFormulario(payload).subscribe({
         next: () => {
-          this.enviado = true;
           this.enviando = false;
-          this.formulario.reset();
-          this.inicializarFormulario();
-          setTimeout(() => { this.enviado = false; }, 4000);
+          this.mostrarModalExito();
         },
         error: () => {
           this.enviando = false;
@@ -378,6 +377,41 @@ export class FormComponent implements OnInit {
     } else {
       this.marcarCamposInvalidos();
     }
+  }
+
+  mostrarModalExito() {
+    // Mostrar modal de éxito
+    this.mostrarExito = true;
+    
+    // Iniciar contador regresivo
+    this.iniciarContador();
+    
+    // Después de 3 segundos, redirigir al dashboard
+    setTimeout(() => {
+      this.mostrarExito = false;
+      this.router.navigate(['/dashboard']);
+    }, 3000);
+  }
+
+  iniciarContador() {
+    let contador = 3;
+    const elementoContador = document.getElementById('contador');
+    
+    const intervalo = setInterval(() => {
+      contador--;
+      if (elementoContador) {
+        elementoContador.textContent = contador.toString();
+      }
+      
+      if (contador <= 0) {
+        clearInterval(intervalo);
+      }
+    }, 1000);
+  }
+
+  irAlDashboard() {
+    this.mostrarExito = false;
+    this.router.navigate(['/dashboard']);
   }
 
   marcarCamposInvalidos() {
