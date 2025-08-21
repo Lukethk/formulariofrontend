@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { BrigadasService } from '../../services/brigadas.service';
@@ -8,7 +8,7 @@ import { BrigadasService } from '../../services/brigadas.service';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
@@ -20,6 +20,12 @@ export class RegisterComponent implements OnInit {
   showPassword = false;
   showConfirmPassword = false;
   brigadas: any[] = [];
+  showNuevaBrigadaForm = false;
+  loadingBrigada = false;
+  nuevaBrigada = {
+    nombre: '',
+    ubicacion: ''
+  };
   roles = [
     { value: 'bombero', label: 'Bombero' },
     { value: 'comandante', label: 'Comandante' },
@@ -81,6 +87,63 @@ export class RegisterComponent implements OnInit {
       return { passwordMismatch: true };
     }
     return null;
+  }
+
+  onBrigadaChange(): void {
+    const brigadaId = this.registerForm.get('brigada_id')?.value;
+    if (brigadaId === 'nueva') {
+      this.showNuevaBrigadaForm = true;
+      this.registerForm.patchValue({ brigada_id: '' });
+    } else {
+      this.showNuevaBrigadaForm = false;
+    }
+  }
+
+  crearNuevaBrigada(): void {
+    if (!this.nuevaBrigada.nombre) {
+      this.errorMessage = 'El nombre de la brigada es requerido';
+      return;
+    }
+
+    this.loadingBrigada = true;
+    this.errorMessage = '';
+
+    const brigadaData = {
+      nombre: this.nuevaBrigada.nombre,
+      ubicacion: this.nuevaBrigada.ubicacion || '',
+      activa: true
+    };
+
+    this.brigadasService.createBrigada(brigadaData).subscribe({
+      next: (response) => {
+        if (response && response.success) {
+          // Agregar la nueva brigada a la lista
+          this.brigadas.push(response.data);
+          // Seleccionar la nueva brigada
+          this.registerForm.patchValue({ brigada_id: response.data.id });
+          // Ocultar el formulario
+          this.showNuevaBrigadaForm = false;
+          // Limpiar el formulario de nueva brigada
+          this.nuevaBrigada = { nombre: '', ubicacion: '' };
+          this.successMessage = 'Brigada creada exitosamente';
+        } else {
+          this.errorMessage = response?.message || 'Error creando la brigada';
+        }
+      },
+      error: (error) => {
+        console.error('Error creando brigada:', error);
+        this.errorMessage = error.error?.message || 'Error creando la brigada';
+      },
+      complete: () => {
+        this.loadingBrigada = false;
+      }
+    });
+  }
+
+  cancelarNuevaBrigada(): void {
+    this.showNuevaBrigadaForm = false;
+    this.nuevaBrigada = { nombre: '', ubicacion: '' };
+    this.errorMessage = '';
   }
 
   onSubmit(): void {
