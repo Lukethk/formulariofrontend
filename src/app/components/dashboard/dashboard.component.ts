@@ -383,4 +383,8 @@ export class DashboardComponent implements OnInit {
     };
     return iconos[tipo as keyof typeof iconos] || iconos.info;
   }
+
+  mostrarProximamente(funcionalidad: string): void {
+    alert(`🚀 Próximamente: ${funcionalidad}\n\nEsta funcionalidad estará disponible en una próxima actualización del sistema.`);
+  }
 }

@@ -96,7 +96,7 @@ export class PerfilComponent implements OnInit {
   }
 
   guardarPerfil(): void {
-    if (this.perfilForm.valid) {
+    if (this.perfilForm.valid && this.currentUser) {
       this.loading = true;
       const datosActualizados = this.perfilForm.value;
       
@@ -104,13 +104,16 @@ export class PerfilComponent implements OnInit {
       // Por ahora simulamos la actualización
       setTimeout(() => {
         if (this.currentUser) {
-          this.currentUser = {
+          const usuarioActualizado: User = {
             ...this.currentUser,
             ...datosActualizados
           };
           
           // Actualizar en el servicio de autenticación
-          this.authService.updateCurrentUser(this.currentUser);
+          this.authService.updateCurrentUser(usuarioActualizado);
+          
+          // Actualizar la referencia local
+          this.currentUser = usuarioActualizado;
           
           this.editandoPerfil = false;
           this.loading = false;
