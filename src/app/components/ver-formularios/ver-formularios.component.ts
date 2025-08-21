@@ -38,6 +38,10 @@ export class VerFormulariosComponent implements OnInit {
   totalFormularios = 0;
   totalPaginas = 1;
   
+  // Detalles del formulario
+  formularioSeleccionado: Formulario | null = null;
+  mostrarDetalle = false;
+  
   // Math para usar en el template
   Math = Math;
 
@@ -134,8 +138,13 @@ export class VerFormulariosComponent implements OnInit {
   }
 
   verDetalle(id: string): void {
-    console.log('Ver detalle del formulario:', id);
-    // Aquí se implementaría la lógica para ver el detalle
+    this.formularioSeleccionado = this.formularios.find(f => f.id === id) || null;
+    this.mostrarDetalle = true;
+  }
+
+  cerrarDetalle(): void {
+    this.mostrarDetalle = false;
+    this.formularioSeleccionado = null;
   }
 
   editarFormulario(id: string): void {
@@ -194,5 +203,26 @@ export class VerFormulariosComponent implements OnInit {
 
   getTotalItems(categoria: { [key: string]: number }): number {
     return Object.values(categoria).reduce((total, cantidad) => total + cantidad, 0);
+  }
+
+  getItemsFromCategory(categoria: { [key: string]: number }): Array<{nombre: string, cantidad: number}> {
+    return Object.entries(categoria).map(([nombre, cantidad]) => ({
+      nombre: this.formatItemName(nombre),
+      cantidad: cantidad
+    }));
+  }
+
+  formatItemName(nombre: string): string {
+    // Convertir nombres de propiedades en nombres legibles
+    const nombres = {
+      'casco': 'Casco',
+      'chaqueta': 'Chaqueta',
+      'talla_42': 'Talla 42',
+      'talla_43': 'Talla 43',
+      'talla_41': 'Talla 41',
+      'hacha': 'Hacha',
+      'manguera': 'Manguera'
+    };
+    return nombres[nombre as keyof typeof nombres] || nombre;
   }
 }

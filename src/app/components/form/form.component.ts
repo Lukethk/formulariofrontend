@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { FormulariosNecesidadesService } from '../../services/formularios-necesidades.service';
 
 export interface FormularioNecesidadesBomberos {
@@ -178,7 +179,11 @@ export class FormComponent implements OnInit {
   tallasGuantes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
   tallasBotas = ['37', '38', '39', '40', '41', '42', '43'];
 
-  constructor(private fb: FormBuilder, private formulariosSrv: FormulariosNecesidadesService) {
+  constructor(
+    private fb: FormBuilder, 
+    private formulariosSrv: FormulariosNecesidadesService,
+    private router: Router
+  ) {
     this.formulario = this.fb.group({});
   }
 
@@ -406,6 +411,10 @@ export class FormComponent implements OnInit {
       }
     }
     return '';
+  }
+
+  volverAtras(): void {
+    this.router.navigate(['/dashboard']);
   }
 
   // Métodos auxiliares para acceder a grupos del formulario
