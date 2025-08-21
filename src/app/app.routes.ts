@@ -4,6 +4,7 @@ import { VerFormulariosComponent } from './components/ver-formularios/ver-formul
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NoAuthGuard } from './guards/no-auth.guard';
 
@@ -36,6 +37,11 @@ export const routes: Routes = [
   { 
     path: 'ver-formularios', 
     component: VerFormulariosComponent, 
+    canActivate: [AuthGuard] 
+  },
+  { 
+    path: 'perfil', 
+    component: PerfilComponent, 
     canActivate: [AuthGuard] 
   },
   

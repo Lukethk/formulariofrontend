@@ -109,6 +109,15 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  updateCurrentUser(updatedUser: User): void {
+    if (this.isBrowser()) {
+      // Actualizar en localStorage
+      localStorage.setItem(this.USER_KEY, JSON.stringify(updatedUser));
+      // Actualizar en el BehaviorSubject
+      this.currentUserSubject.next(updatedUser);
+    }
+  }
+
   login(credentials: LoginRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.API_BASE_URL}/login`, credentials)
       .pipe(
