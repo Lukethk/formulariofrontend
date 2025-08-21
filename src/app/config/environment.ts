@@ -1,10 +1,8 @@
 export const environment = {
   production: false,
   
-  // Detectar automáticamente la URL base según el entorno
-  apiUrl: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-    ? 'https://formulario-backend-u7ku.onrender.com'  // Desarrollo local apuntando a Render
-    : 'https://formulario-backend-u7ku.onrender.com', // Producción en Vercel apuntando a Render
+  // URL base para desarrollo
+  apiUrl: 'https://formulario-backend-u7ku.onrender.com',
 };
 
 export const API_ENDPOINTS = {
