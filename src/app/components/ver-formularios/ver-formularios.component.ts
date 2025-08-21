@@ -57,9 +57,8 @@ export class VerFormulariosComponent implements OnInit {
   cargarBrigadas(): void {
     this.brigadasService.getBrigadas().subscribe({
       next: (response) => {
-        if (response && response.success) {
-          this.brigadas = response.data || [];
-        }
+        // Ahora el servicio devuelve directamente el array de brigadas
+        this.brigadas = response || [];
       },
       error: (error) => {
         console.error('Error cargando brigadas:', error);
