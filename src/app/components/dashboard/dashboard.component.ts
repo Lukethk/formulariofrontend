@@ -358,6 +358,14 @@ export class DashboardComponent implements OnInit {
     return iconos[tipo as keyof typeof iconos] || iconos.info;
   }
 
+  crearFormulario(): void {
+    this.router.navigate(['/necesidades']);
+  }
+
+  verFormularios(): void {
+    this.router.navigate(['/ver-formularios']);
+  }
+
   mostrarProximamente(funcionalidad: string): void {
     this.mensajeProximamente = `${funcionalidad} estará disponible en una próxima actualización`;
     this.mostrarModalProximamente = true;
