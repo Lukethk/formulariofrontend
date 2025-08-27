@@ -119,36 +119,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  // MÉTODOS DE EMERGENCIA - ACCESO RÁPIDO
-  crearFormularioEmergencia(): void {
-    // Navegar a formulario de emergencia con prioridad máxima
-    this.router.navigate(['/necesidades'], { 
-      queryParams: { 
-        tipo: 'emergencia',
-        prioridad: 'maxima'
-      }
-    });
-  }
 
-  crearFormularioRapido(): void {
-    // Navegar a formulario rápido simplificado
-    this.router.navigate(['/necesidades'], { 
-      queryParams: { 
-        tipo: 'rapido',
-        modo: 'simplificado'
-      }
-    });
-  }
-
-  verEstadoActual(): void {
-    // Navegar a ver formularios con filtro de pendientes
-    this.router.navigate(['/ver-formularios'], { 
-      queryParams: { 
-        estado: 'pendiente',
-        prioridad: 'alta'
-      }
-    });
-  }
 
   private loadDashboardData(): void {
     // Simular carga de datos del dashboard personalizados
